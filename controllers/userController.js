@@ -9,7 +9,7 @@ const registerUser = asyncHandler( async(req, res) => {
         throw new Error('please add your name, email and password')
     }
 
-    res.json({ message : 'the user name is registered' })
+    res.json({ message : `the user ${name} is registered` })
 })
 
 const loginUser = asyncHandler( async(req, res) => {
@@ -25,11 +25,11 @@ const loginUser = asyncHandler( async(req, res) => {
 })
 
 const updateUser = asyncHandler( async(req, res) => {
-    res.json({ message : 'user updated' })
+    res.json({ message : `user ${req.params.id} updated` })
 })
 
 const deleteUser = asyncHandler( async(req, res) => {
-    res.json({ message : 'user deleted' })
+    res.json({ message : `user ${req.params.id} deleted` })
 })
 
 const getUsers = asyncHandler( async(req, res) => {
@@ -41,7 +41,7 @@ const getUsers = asyncHandler( async(req, res) => {
         throw new Error('please add name of the user')
     }
 
-    res.json({ message : `here is the user ${name}` })
+    res.json({ message : `here are the users ${name}` })
 })
 
 const getMe = asyncHandler( async(req, res) => {

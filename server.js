@@ -3,6 +3,9 @@ const express = require('express')
 const errorHandler = require('./middlewares/errorHandler')
 const dotenv = require('dotenv').config()
 
+//connect to DB
+require('./db')()
+
 //init server
 const app = express()
 
@@ -14,7 +17,7 @@ app.use(express.urlencoded({extended : true}))
 app.use('/api/user', require('./routes/userRoutes'))
 
 //unknown routes
-app.use('/*', (req, res) => { res.send('this page doesnt exist') })
+app.use('/*', (req, res) => { res.status(404).send('this page doesnt exist') })
 
 app.use(errorHandler)
 
