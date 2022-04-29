@@ -1,5 +1,6 @@
 //importing packages
 const express = require('express')
+const errorHandler = require('./middlewares/errorHandler')
 const dotenv = require('dotenv').config()
 
 //init server
@@ -15,6 +16,7 @@ app.use('/api/user', require('./routes/userRoutes'))
 //unknown routes
 app.use('/*', (req, res) => { res.send('this page doesnt exist') })
 
+app.use(errorHandler)
 
 //setting the port
 const PORT = process.env.PORT || 3000
