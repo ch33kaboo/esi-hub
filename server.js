@@ -5,6 +5,10 @@ const dotenv = require('dotenv').config()
 //init server
 const app = express()
 
+//middlewares
+app.use(express.json())
+app.use(express.urlencoded({extended : true}))
+
 //the routes
 app.use('/api/user', require('./routes/userRoutes'))
 
