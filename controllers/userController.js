@@ -62,7 +62,24 @@ const updateUser = asyncHandler( async(req, res) => {
 })
 
 const deleteUser = asyncHandler( async(req, res) => {
-    res.json({ message : `user ${req.params.id} deleted` })
+
+    //check that the ID is valid
+    if (! mongoose.Types.ObjectId.isValid(req.params)) {
+        res.status(400)
+        throw new Error('this id is not valid')
+    }
+
+    const user = await User.findById(req.params.id)
+
+        //if user doesnt exist
+        if (!user) {
+            res.status(400)
+            throw new Error('user doesnt exist')
+        }
+    
+    await user.remove()
+
+    res.json({ message : `user ${user.name} deleted` })
 })
 
 const getUsers = asyncHandler( async(req, res) => {
