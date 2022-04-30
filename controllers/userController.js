@@ -71,11 +71,11 @@ const deleteUser = asyncHandler( async(req, res) => {
 
     const user = await User.findById(req.params.id)
 
-        //if user doesnt exist
-        if (!user) {
-            res.status(400)
-            throw new Error('user doesnt exist')
-        }
+    //if user doesnt exist
+    if (!user) {
+        res.status(400)
+        throw new Error('user doesnt exist')
+    }
     
     await user.remove()
 
@@ -90,8 +90,11 @@ const getUsers = asyncHandler( async(req, res) => {
         res.status(400)
         throw new Error('please add name of the user')
     }
+    //creat regex to get the users that their name contains the sent name 
+    const regex = new RegExp(name, 'i') // i for case insensitive
+    const users = await User.find({name : regex})
 
-    res.json({ message : `here are the users ${name}` })
+    res.json(users)
 })
 
 const getMe = asyncHandler( async(req, res) => {
