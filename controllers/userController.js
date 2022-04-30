@@ -1,15 +1,12 @@
 const asyncHandler = require('express-async-handler')
+const User = require('../models/userModel')
 
 const registerUser = asyncHandler( async(req, res) => {
     const {email, password, name} = req.body
 
-    //checking that user sent them
-    if (!email || !password  || !name) {
-        res.status(400)
-        throw new Error('please add your name, email and password')
-    }
+    const user = await User.create({name, email, password})
 
-    res.json({ message : `the user ${name} is registered` })
+    res.json(user)
 })
 
 const loginUser = asyncHandler( async(req, res) => {
