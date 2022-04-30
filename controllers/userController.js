@@ -45,22 +45,20 @@ const updateUser = asyncHandler( async(req, res) => {
     if (name) {
         user.name = name
         await user.save()
-        res.json({ message : `user's name was updated` , user : user})
     }
 
     //if he want to update email
     if (email) {
-        user.email = email
-        await user.save()
-        res.json({ message : `user's email was updated` , user : user})
+        throw new Error('you cannot update the email')
     }
 
     //if he want to update password
     if (password) {
         user.password = password
         await user.save()
-        res.json({ message : `user's password was updated` , user : user})
     }
+
+    res.json({ message : `user was updated` , user : user})
 })
 
 const deleteUser = asyncHandler( async(req, res) => {
